@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import '../css/body.css';
+import LeftMenu from '../components/left_menu';
+import RightMenu from '../components/right_menu';
+import '../stylesheets/body.css';
 
 class Body extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render () {
 		return (
-			<body>
-				<h2>Body</h2>
-			</body>
-			// <div className='body'>
-			// 	<h2>Body</h2>
-			// </div>
+			<div className='body-component'>
+				<LeftMenu />
+				<RightMenu />
+			</div>
 		);
 	}
 }
