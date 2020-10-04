@@ -6,3 +6,23 @@
     border: 2px solid black;
   }
 }
+
+.list {
+  color: #fff;
+  width: 200px;
+  height: 50xp;
+  margin: 20px;
+  background-color: #76c9c5;
+  border-radius: 5px;
+  padding: 10px;
+
+  td {
+    text-align: center;
+    margin: 5px 5px;
+
+    span {
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+}
