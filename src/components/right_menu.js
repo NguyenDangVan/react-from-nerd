@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import ItemInfo from '../components/item_info';
-import '../stylesheets/movie.scss';
-import '../stylesheets/right_menu.scss';
 
 export default class RightMenu extends Component {
   constructor(props) {
