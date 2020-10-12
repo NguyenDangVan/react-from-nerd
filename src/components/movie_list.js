@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MovieForm from "./movie_form";
 import Movie from "./movie";
 
-export default class MovieList1 extends Component {
+export default class MovieList extends Component {
   constructor(props){
     super(props)
 

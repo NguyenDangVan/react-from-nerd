@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../stylesheets/form.css";
 
 export default class MovieForm extends Component {
   constructor(props) {
