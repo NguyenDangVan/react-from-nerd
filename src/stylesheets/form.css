@@ -6,7 +6,7 @@
   width: 50%;
   height: 100%;
   float: left;
-  border: 1px solid pink;
+  border: 1px solid #7e7f94;
 }
 
 .movie-name {
@@ -42,12 +42,25 @@
 }
 
 .movie-form button {
+  margin: 5px;
   height: 50px;
   width: 100px;
   border-radius: 5px;
   border: 0;
-  background-color: rgb(230, 202, 81);
+  background-color: rgb(103, 224, 113, 1);
   cursor: pointer;
   font-weight: bolder;
   color: white;
+}
+
+.button-submit {
+  padding-top: 15px;
+  height: 36px;
+  margin-top: 10px;
+  width: 100px;
+  background-color: rgb(103, 224, 113, 1);
+  cursor: pointer;
+  font-weight: bolder;
+  border-radius: 5px;
+  text-align: center;
 }
