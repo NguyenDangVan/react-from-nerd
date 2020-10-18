@@ -2,3 +2,21 @@ tr th {
   margin: 0 10px;
   padding: 10px 20px;
 }
+
+tr li {
+	margin: 3px 4px;
+    background-color: #6b9865;
+    border-radius: 2px;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: inline;
+    cursor: pointer;
+}
+
+tr {
+	text-align: center;
+}
+
+.faicons {
+	cursor: pointer;
+}

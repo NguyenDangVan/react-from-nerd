@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import UserInfo from "./user_info";
+import Pagination from "../shared/pagination";
 import "../../stylesheets/user_list.css";
 
 export default class UserList extends Component {
   render () {
+  	const { users, isEdit, handleEdit,
+  		isCancel, handleDelete } = this.props;
 		return (
 			<table>
 				<thead>
@@ -14,15 +16,14 @@ export default class UserList extends Component {
 						<th className="user-delete">Delete</th>
 					</tr>
 				</thead>
-				<UserInfo
-					users={this.props.users}
-					isEdit={this.props.isEdit}
-					focusUserId={this.props.focusUserId}
-					handleHonverOn={(focusUserId) => this.props.changeState("focusUserId", focusUserId)}
-					handleEdit={() => this.props.changeState("isEdit", true)}
-					handleDelete={(focusUserId) => this.props.deleteUser(focusUserId)}
-				
-				/>
+				<tbody>
+					<Pagination
+						data={users}
+						isEdit={isEdit} isCancel={isCancel}
+						handleEdit={handleEdit}
+						handleDelete={handleDelete}
+					/>
+				</tbody>
 			</table>
 		)
 	}

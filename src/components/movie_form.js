@@ -65,7 +65,6 @@ export default class MovieForm extends Component {
   }
 
   render() {
-    console.log(this.props.edit)
     return(
       <form onSubmit={(e) => this.handleSubmit(e)} className="movie-form">
         <input 
