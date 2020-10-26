@@ -1,15 +1,28 @@
 import React, { Component } from "react";
-import MovieList from "./movie_list";
 import UserList from "./user/user_list";
 import UserForm from "./user/user_form";
 import "../stylesheets/movie.scss";
 import "../stylesheets/body.css";
 
 class Body extends Component {
-  state = {users: [
-    {id: 1, name: "vaan", email: "nguyen.dang.van@sun-asterisk.com"},
-    {id: 2, name: "en", email: "chim.en@sun-asterisk.com"}
-  ], isEdit: false, focusUserId: null}
+  state = {
+    users: [
+      {id: 1, name: "vaan", email: "nguyen.dang.van@sun-asterisk.com"},
+      {id: 2, name: "Van1", email: "en1.en@sun-asterisk.com"},
+      {id: 3, name: "Van2", email: "gr.en@sun-asterisk.com"},
+      {id: 4, name: "Van3", email: "lalaland.en@sun-asterisk.com"},
+      {id: 5, name: "Van4", email: "youreiscoffe.en@sun-asterisk.com"},
+      {id: 6, name: "Van5", email: "ineed.en@sun-asterisk.com"},
+      {id: 7, name: "Van6", email: "inmymorning.en@sun-asterisk.com"},
+      {id: 8, name: "Van7", email: "yourare.en@sun-asterisk.com"},
+      {id: 9, name: "Van8", email: "mysunshine.en@sun-asterisk.com"},
+      {id: 10, name: "Van9", email: "ipouring.en@sun-asterisk.com"},
+    ],
+    focusUserId: null,
+    isEdit: false,
+    isCancel: false,
+    isSave: false
+  }
 
   changeState = (field, value) => {
     this.setState({[field]: value});
@@ -17,54 +30,75 @@ class Body extends Component {
 
   getCurrentUser = () => {
     const currentUser = this.state.users.filter(user => user.id === this.state.focusUserId)
-    debugger
     return currentUser;
   }
 
-  deleteUser = (userId) => {
-    const removeArr = this.state.users.filter(user => user.id !== userId);
+  handleDelete = (id) => {
+    const removeArr = this.state.users.filter(user => user.id !== id);
     this.setState({users: removeArr})
   }
 
-  handleCancel = () => {
-    this.setState({isEdit: false})
+  handleEdit = (id) => {
+    this.setState({
+      focusUserId: id,
+      isEdit: true,
+      isCancel: false,
+      isSave: false
+    })
   }
 
-  handleSubmit = (e, id, newValue) => {
-    e.preventDefault();
-    if(this.state.isEdit)
-    {
-      const listUser = this.state.users;
-      const index = listUser.findIndex(user => user.id === id)
-      listUser[index] = newValue;
-      this.setState({ users: listUser});
+  handleSubmit = (newValue, action) => {
+    let newState = this.state;
+    const newListUser = newState.users.map(user => user.id === newValue.id ? newValue : user)
+
+    if (action === "submit") {
+      newState = Object.assign(newState, {isSave: true, isCancel: false, isEdit: false })
+    } else {
+      newState = Object.assign(newState, {isSave: false, isCancel: true, isEdit: false })
     }
-    this.handleCancel();
+
+    if(this.state.isSave) {
+      this.setState({users: newListUser})
+    } else {
+      this.setState({users: this.state.users})
+    }
+  }
+
+  renderListUser = () => {
+    const { users, focusUserId, isCancel, isEdit } = this.state;
+
+    return <UserList
+      users={users}
+      focusUserId={focusUserId}
+      isEdit={isEdit}
+      isCancel={isCancel}
+      handleEdit={this.handleEdit.bind(this)}
+      handleDelete={this.handleDelete.bind(this)}
+    />
+  }
+
+  renderUserForm = () => {
+    const { users, isSave, isCancel, focusUserId } = this.state;
+    if (isCancel || isSave || focusUserId === null) {return null}
+
+    return <UserForm
+      users={users}
+      focusUserId={focusUserId}
+      isSave={isSave}
+      isCancel={isCancel}
+      handleSubmit={this.handleSubmit.bind(this)}
+    />
   }
 
   render () {
-    const initData=[
-      {id: 1, movie: "Mulan 2020", country: "China"},
-      {id: 2, movie: "Ròm", country: "VietNam"},
-      {id: 3, movie: "Tenet", country: "United Kingdom, United State"}
-    ]
-    
 		return (
 			<div className="body-component">
-        <UserList
-          users={this.state.users}
-          isEdit={this.state.isEdit}
-          focusUserId={this.state.focusUserId}
-          changeState={this.changeState}
-          deleteUser={this.deleteUser}
-        />
-        {this.state.isEdit ? <UserForm 
-          currentValues={this.getCurrentUser}
-          handleCancel={this.handleCancel}
-          handleSubmit={this.handleSubmit}
-        /> : null}
-        {/* <User /> */}
-        {/* <MovieList data={initData} /> */}
+        <div className="left-menu">
+          { this.renderListUser() }
+        </div>
+        <div className="right-menu">
+          { this.renderUserForm() }
+        </div>
 			</div>
 		);
 	}

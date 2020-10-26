@@ -3,34 +3,46 @@ import WrapUser from "../wrapper/wrap_user";
 import "../../stylesheets/form.css";
 
 export default class UserForm extends Component {
-	state = {currentValues: this.props.currentValues, errors: {}}
+  componentWillMount() {
+    const user = this.focusUser();
+
+    this.setState({
+      id: user.id || null,
+      name: user.name || "",
+      email: user.email || ""
+    })
+  }
+
+  focusUser = () => {
+    const { users, focusUserId } = this.props;
+    return users.find(user => user.id === focusUserId) || {};
+  }
 
   render () {
 		return (
-      <WrapUser>
-        {({currentValues, errors, onChange}) => (
+      <WrapUser oldValue={this.focusUser()} newValue={this.state} handleSubmit={this.props.handleSubmit.bind(this)}>
+        {({ currentValues, errors, onChange, disabled, onSubmit}) => (
           <div>
             <div>
-              <label>Name: </label>{console.log(currentValues)}
-              <input name="name" onChange={onChange} value={currentValues["name"]}></input>
+              <label>Name: </label>
+              <input name="name" value={currentValues.name}
+                onChange={onChange}
+              ></input>
             </div>
             <div>
               <label>Email: </label>
-              <input name="email" onChange={onChange} value={currentValues["email"]}></input>
+              <input name="email" value={currentValues.email}
+                onChange={onChange}
+              ></input>
             </div>
-            {
-              console.log(errors)
-            }
-            <div className="error-message">{Object.values(errors).filter(Boolean).join(", ")}</div>
-            <div 
-              className="button-submit"
-              onClick={this.props.handleCancel}
-            >Cancel</div>
-            <div 
-              className="button-submit"
-              onClick={this.props.handleSubmit}
-              disabled={Object.values(this.state.errors).filter(Boolean).length}
-            >Submit</div>
+            <button 
+              className="button-submit" name="cancel"
+              onClick={onSubmit}
+            >Cancel</button>
+            <button
+              className="button-submit" name="submit"
+              onClick={onSubmit} disabled={disabled}
+            >Submit</button>
           </div>
         )}
       </WrapUser>

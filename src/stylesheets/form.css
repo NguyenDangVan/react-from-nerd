@@ -54,13 +54,20 @@
 }
 
 .button-submit {
-  padding-top: 15px;
-  height: 36px;
-  margin-top: 10px;
-  width: 100px;
-  background-color: rgb(103, 224, 113, 1);
-  cursor: pointer;
-  font-weight: bolder;
-  border-radius: 5px;
+  background-color: rgb(49 178 191);
+  width: 60px;
+  height: 40px;
+  float: left;
+  padding: 10 0px;
+  margin: 10px 10px;
   text-align: center;
+  line-height: 37px;
+  border-radius: 5px;
+  color: #dcdce6;
+  cursor: pointer;
+}
+
+.button-submit:disabled {
+  background-color: gray;
+
 }
