@@ -1,20 +1,18 @@
-import { Component } from "react";
-
-export default class WrapPaginate extends Component {
-	handleClick = (e) => {
-		this.props.handleClick(e);
+const WrapPaginate = (props) => {
+	const handleClick = (e) => {
+		props.handleClick(e);
 	}
 
-  render() {
-  	const { data, pageLimit } = this.props;
-  	const pageNumbers = [];
+	const { data, pageLimit } = props;
+	const pageNumbers = [];
 
-  	for(let i=1; i <= Math.ceil(data.length / pageLimit); i++)
-			pageNumbers.push(i);
+	for(let i=1; i <= Math.ceil(data.length / pageLimit); i++)
+		pageNumbers.push(i);
 
-  	return this.props.children({
-  		pageNumbers: pageNumbers,
-  		handleClick: this.handleClick
-  	})
-	}
+	return props.children({
+		pageNumbers: pageNumbers,
+		handleClick: handleClick
+	})
 }
+
+export default WrapPaginate;
