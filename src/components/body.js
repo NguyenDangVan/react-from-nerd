@@ -33,6 +33,8 @@ const Body = (props) => {
     setIsEdit(true);
     setIsCancel(false);
     setIsSave(false);
+    console.log("van dep trai qua");
+    console.log("con phai noi");
   }
 
   const handleSubmit = (newValue, action) => {
